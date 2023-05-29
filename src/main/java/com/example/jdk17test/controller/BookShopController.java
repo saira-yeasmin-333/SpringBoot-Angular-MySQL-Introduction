@@ -1,8 +1,6 @@
 package com.example.jdk17test.controller;
 
-import com.example.jdk17test.entity.Book;
 import com.example.jdk17test.entity.BookShop;
-import com.example.jdk17test.service.BookService;
 import com.example.jdk17test.service.BookShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,35 +10,35 @@ import java.util.List;
 public class BookShopController {
     @Autowired
     private BookShopService bookShopService;
-    @PostMapping(value = "/addBookShop")
+    @PostMapping(value = "/shop/add")
     public BookShop addBookShop(@RequestBody BookShop bookShop){
         return bookShopService.saveShop(bookShop);
     }
-    @PostMapping("/addBookShops")
+    @PostMapping("/shop/addAll")
     public List<BookShop> addBookShops(@RequestBody List<BookShop> bookShops){
         return bookShopService.saveBookShops(bookShops);
     }
 
-    @GetMapping("/bookShops")
+    @GetMapping("/shop/getAllShops")
     public List<BookShop> findAllBookShops(){
         return bookShopService.getBookShops();
     }
 
-    @GetMapping("/bookShop/{id}")
-    public BookShop findBookShopByTd(@PathVariable int id){
-        return bookShopService.getBookShopById(id);
+    @GetMapping("/shop/findById/{shopId}")
+    public BookShop findBookShopByTd(@PathVariable Long shopId){
+        return bookShopService.getBookShopById(shopId);
     }
 
-    @GetMapping("/bookshop_name/{title}")
+    @GetMapping("/shop/findByName/{name}")
     public BookShop findBookShopByName(@PathVariable String name){
-        return bookShopService.getBookShopByName(name);
+        return bookShopService.getShopByName(name);
     }
-    @PutMapping("/updateShop")
+    @PutMapping("/shop/update")
     public BookShop updateBookShop(@RequestBody BookShop bookShop){
         return bookShopService.updateBookShop(bookShop);
     }
-    @DeleteMapping("/deleteShop/{id}")
-    public String deleteBookShop(@PathVariable int id){
-        return bookShopService.deleteBookShop(id);
+    @DeleteMapping("/shop/delete/{shopId}")
+    public String deleteBookShop(@PathVariable Long shopId){
+        return bookShopService.deleteBookShop(shopId);
     }
 }

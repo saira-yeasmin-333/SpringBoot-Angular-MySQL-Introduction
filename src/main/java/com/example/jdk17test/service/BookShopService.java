@@ -23,26 +23,25 @@ public class BookShopService {
         return bookShopRepository.findAll();
     }
 
-    public BookShop getBookShopById(int id){
-        return bookShopRepository.findById(id).get();
+    public BookShop getBookShopById(Long shopID){
+        return bookShopRepository.findById(shopID).get();
     }
-    public BookShop getBookShopByName(String name){
-        return bookShopRepository.findByTitle(name);
-    }
-
-    public String deleteBookShop(int id){
-        bookShopRepository.deleteById(id);
-        return "BookShop with id "+id+" removed\n";
+   public BookShop getShopByName(String shopName){
+        return bookShopRepository.findBookShopByShopName(shopName);
+   }
+    public String deleteBookShop(Long shopId){
+        bookShopRepository.deleteById(shopId);
+        return "BookShop with id "+shopId+" removed\n";
     }
 
     public BookShop updateBookShop(BookShop bookShop){
-        BookShop prev=bookShopRepository.findById(bookShop.getShop_no()).orElse(null);
+        BookShop prev=bookShopRepository.findById(bookShop.getShopId()).orElse(null);
         prev.setLocation(bookShop.getLocation());
         prev.setEmail(bookShop.getEmail());
-        prev.setContact_no(bookShop.getContact_no());
+        prev.setContactNo(bookShop.getContactNo());
         prev.setPrice(bookShop.getPrice());
-        prev.setShop_name(bookShop.getShop_name());
-        prev.setYear_of_publish(bookShop.getYear_of_publish());
+        prev.setShopName(bookShop.getShopName());
+        prev.setYearOfPublish(bookShop.getYearOfPublish());
         return bookShopRepository.save(prev);
     }
 }

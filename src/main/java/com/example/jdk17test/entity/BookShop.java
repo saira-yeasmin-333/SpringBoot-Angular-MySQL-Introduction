@@ -3,22 +3,22 @@ package com.example.jdk17test.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
-@ToString
-@Table(name = "book")
 public class BookShop {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int shop_no;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long shopId;
+    @OneToMany
+    private List<Book>books;
     private long price;
-    private int  year_of_publish;
-    private String shop_name;
+    private int  yearOfPublish;
+    private String shopName;
     private String location;
     private String email;
-    private String contact_no;
+    private String contactNo;
 }

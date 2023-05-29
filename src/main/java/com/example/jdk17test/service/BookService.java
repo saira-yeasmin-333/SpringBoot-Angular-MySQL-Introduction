@@ -21,26 +21,26 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book getBookById(int id){
-        return bookRepository.findById(id).get();
+    public Book getBookById(Long bookId){
+        return bookRepository.findById(bookId).get();
     }
     public Book getBookByTitle(String title){
         return bookRepository.findByTitle(title);
     }
 
-    public String deleteBook(int id){
-        bookRepository.deleteById(id);
-        return "Book with id "+id+" removed\n";
+    public String deleteBook(Long bookId){
+        bookRepository.deleteById(bookId);
+        return "Book with id "+bookId+" removed\n";
     }
 
     public Book updateBook(Book book){
-        Book prev=bookRepository.findById(book.getBook_id()).orElse(null);
-        prev.setAuthor(book.getAuthor());
+        Book prev=bookRepository.findById(book.getBookId()).orElse(null);
         prev.setGenre(book.getGenre());
         prev.setTitle(book.getTitle());
         prev.setPrice(book.getPrice());
         prev.setPublisher(book.getPublisher());
-        prev.setYear_of_publish(book.getYear_of_publish());
+        prev.setYearOfPublish(book.getYearOfPublish());
+        prev.setBookShop(book.getBookShop());
         return bookRepository.save(prev);
     }
 }
