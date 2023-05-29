@@ -4,23 +4,21 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
-@ToString
-@Table(name = "book")
-public class Book implements Serializable {
+public class Book  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int book_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bookId;
+    @ManyToOne
+    private BookShop bookShop;
     private String title;
     private long price;
-    private int  year_of_publish;
-    private String author;
+    private int  yearOfPublish;
     private String genre;
     private String publisher;
 
