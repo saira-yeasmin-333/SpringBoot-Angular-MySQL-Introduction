@@ -1,5 +1,6 @@
 package com.example.jdk17test.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,12 +15,17 @@ public class Book  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;
-    @ManyToOne
-    private BookShop bookShop;
+//    @ManyToOne
+//    private BookShop bookShop;
     private String title;
     private long price;
     private int  yearOfPublish;
     private String genre;
     private String publisher;
-
+//    @JsonIgnore
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(joinColumns = @JoinColumn(name = "book_id"),inverseJoinColumns = @JoinColumn(name = "author_id"))
+//    private List<Author>authors;
+    @OneToMany
+    List<BookAuthorJoin>bookAuthorJoins;
 }

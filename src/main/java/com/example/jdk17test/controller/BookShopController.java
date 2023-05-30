@@ -7,38 +7,43 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
+@RequestMapping( "/api/bookshops")
 public class BookShopController {
     @Autowired
     private BookShopService bookShopService;
-    @PostMapping(value = "/shop/add")
+    @PostMapping
     public BookShop addBookShop(@RequestBody BookShop bookShop){
         return bookShopService.saveShop(bookShop);
     }
-    @PostMapping("/shop/addAll")
-    public List<BookShop> addBookShops(@RequestBody List<BookShop> bookShops){
-        return bookShopService.saveBookShops(bookShops);
-    }
+//    @PostMapping("/shop/addAll")
+//    public List<BookShop> addBookShops(@RequestBody List<BookShop> bookShops){
+//        return bookShopService.saveBookShops(bookShops);
+//    }
 
-    @GetMapping("/shop/getAllShops")
+    @GetMapping
     public List<BookShop> findAllBookShops(){
         return bookShopService.getBookShops();
     }
 
-    @GetMapping("/shop/findById/{shopId}")
+    @GetMapping(path = "/{shopId}")
     public BookShop findBookShopByTd(@PathVariable Long shopId){
         return bookShopService.getBookShopById(shopId);
     }
 
-    @GetMapping("/shop/findByName/{name}")
+    @GetMapping(path = "/{name}")
     public BookShop findBookShopByName(@PathVariable String name){
         return bookShopService.getShopByName(name);
     }
-    @PutMapping("/shop/update")
-    public BookShop updateBookShop(@RequestBody BookShop bookShop){
-        return bookShopService.updateBookShop(bookShop);
+    @PutMapping(path = "/{shopId}")
+    public BookShop updateBookShop(@PathVariable Long shopId,@RequestBody BookShop bookShop){
+        return bookShopService.updateBookShop(shopId,bookShop);
     }
-    @DeleteMapping("/shop/delete/{shopId}")
+    @DeleteMapping(path = "/{shopId}")
     public String deleteBookShop(@PathVariable Long shopId){
         return bookShopService.deleteBookShop(shopId);
+    }
+    @DeleteMapping()
+    public String deleteAllBookShops(){
+        return bookShopService.deleteAllBookShops();
     }
 }

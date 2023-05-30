@@ -13,8 +13,6 @@ public class BookShop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long shopId;
-    @OneToMany
-    private List<Book>books;
     private long price;
     private int  yearOfPublish;
     private String shopName;
