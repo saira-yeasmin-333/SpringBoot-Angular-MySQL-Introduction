@@ -1,6 +1,7 @@
 package com.example.jdk17test.service;
 
 import com.example.jdk17test.entity.Author;
+import com.example.jdk17test.entity.Book;
 import com.example.jdk17test.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,14 @@ public class AuthorService {
         prev.setAuthorName(author.getAuthorName());
         prev.setBooks(author.getBooks());
         return authorRepository.save(prev);
+    }
+
+    public List<Book>getBooks(Long authorId){
+        Author author=authorRepository.findById(authorId).get();
+        return author.getBooks();
+    }
+
+    public List<Author>getAuthorsByBookId(Long bookId){
+        return authorRepository.getAuthorsByBookId(bookId);
     }
 }
