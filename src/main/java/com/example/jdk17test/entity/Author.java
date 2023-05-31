@@ -17,9 +17,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long authorId;
     private String authorName;
-//    @JsonIgnore
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    private List<Book>books;
-    @OneToMany
-    List<BookAuthorJoin>bookAuthorJoins;
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.REMOVE,mappedBy = "authors")
+    private List<Book>books;
 }

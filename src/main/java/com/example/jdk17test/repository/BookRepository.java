@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book,Long> {
     Book findByTitle(String title);
-//    @Query(value = "select b from Book b inner join b.authors a  on a.authorId = :authorId" )
-    @Query("select b from Book b ,BookAuthorJoin j where j.author.authorId=:authorId and j.book.bookId=b.bookId")
+    @Query(value = "select b from Book b inner join Author a  on a.authorId =:authorId" )
     List<Book> getBooksByAuthorId(@Param("authorId") Long authorId);
 }

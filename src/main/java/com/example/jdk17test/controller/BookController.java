@@ -56,6 +56,7 @@ public class BookController {
     }
     @GetMapping(path = "/getAuthors/{authorId}")
     public List<Book> findAuthorsByTd(@PathVariable Long authorId) {
+        System.out.println("author id in controller :"+authorId+"\n\n");
         return bookService.getBooksByAuthorId(authorId);
     }
 }
