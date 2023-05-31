@@ -30,7 +30,7 @@ public class BookService {
     public Book getBookById(Long bookId){
         return bookRepository.findById(bookId).get();
     }
-    public Book getBookByTitle(String title){
+    public List<Book> getBookByTitle(String title){
         return bookRepository.findByTitle(title);
     }
     public String deleteBook(Long bookId){
