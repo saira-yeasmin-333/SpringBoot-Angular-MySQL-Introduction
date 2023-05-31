@@ -1,7 +1,6 @@
 package com.example.jdk17test.controller;
 
 import com.example.jdk17test.entity.Author;
-import com.example.jdk17test.mapping.AuthorOfBook;
 import com.example.jdk17test.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +15,17 @@ public class AuthorController {
         return authorService.saveAuthor(author);
     }
     @PostMapping("/author/addAll")
-
     public List<Author> addAuthors(@RequestBody List<Author> authors){
         return authorService.saveAuthors(authors);
     }
-
     @GetMapping("/author/getAll")
     public List<Author> findAllAuthors(){
         return authorService.getAllAuthors();
     }
-
     @GetMapping("/author/getById/{authorId}")
     public Author findAuthorByTd(@PathVariable Long authorId){
         return authorService.getAuthorById(authorId);
     }
-
     @PutMapping("author/update")
     public Author updateAuthor(@RequestBody Author author){
         return authorService.updateAuthor(author);
@@ -38,5 +33,9 @@ public class AuthorController {
     @DeleteMapping("author/delete/{authorId}")
     public String deleteAuthor(@PathVariable Long authorId){
         return authorService.deleteAuthor(authorId);
+    }
+    @GetMapping(path = "/author/book/{bookId}")
+    public List<Author> findAuthorsByTd(@PathVariable Long bookId) {
+        return authorService.getAuthorsByBookId(bookId);
     }
 }

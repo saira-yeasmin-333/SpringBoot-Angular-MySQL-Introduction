@@ -38,4 +38,8 @@ public class AuthorService {
         Author author=authorRepository.findById(authorId).get();
         return author.getBooks();
     }
+
+    public List<Author>getAuthorsByBookId(Long bookId){
+        return authorRepository.getAuthorsByBookId(bookId);
+    }
 }
