@@ -27,8 +27,8 @@ public class AuthorService {
         authorRepository.deleteById(authorId);
         return "Author with id "+authorId+" removed\n";
     }
-    public Author updateAuthor(Author author){
-        Author prev=authorRepository.findById(author.getAuthorId()).orElse(null);
+    public Author updateAuthor(Author author, Long authorId){
+        Author prev=authorRepository.findById(authorId).orElse(null);
         prev.setAuthorName(author.getAuthorName());
         prev.setBooks(author.getBooks());
         return authorRepository.save(prev);

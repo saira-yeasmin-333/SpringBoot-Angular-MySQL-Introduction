@@ -23,7 +23,7 @@ public class BookController {
         return bookService.getBookById(bookId);
     }
     @GetMapping(path = "/title/{title}")
-    public Book findBookByTitle(@PathVariable String title){
+    public List<Book> findBookByTitle(@PathVariable String title){
         return bookService.getBookByTitle(title);
     }
     @PutMapping(path = "/{bookId}")
