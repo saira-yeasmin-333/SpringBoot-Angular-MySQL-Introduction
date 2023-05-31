@@ -1,5 +1,6 @@
 package com.example.jdk17test.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,4 +20,7 @@ public class BookShop {
     private String location;
     private String email;
     private String contactNo;
+    @JsonIgnore
+    @OneToMany(mappedBy = "bookShop")
+    List<Book>books;
 }
