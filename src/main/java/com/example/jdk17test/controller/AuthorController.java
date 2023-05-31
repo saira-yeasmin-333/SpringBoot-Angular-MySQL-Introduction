@@ -35,7 +35,7 @@ public class AuthorController {
         return authorService.deleteAuthor(authorId);
     }
     @GetMapping(path = "/author/book/{bookId}")
-    public List<Author> findAuthorsByTd(@PathVariable Long bookId) {
+    public List<Author> findAuthorsByBookTd(@PathVariable Long bookId) {
         return authorService.getAuthorsByBookId(bookId);
     }
 }
