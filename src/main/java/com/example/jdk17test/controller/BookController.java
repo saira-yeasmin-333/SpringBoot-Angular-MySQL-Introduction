@@ -1,14 +1,18 @@
 package com.example.jdk17test.controller;
 
 import com.example.jdk17test.entity.Book;
+import com.example.jdk17test.entity.BookShop;
 import com.example.jdk17test.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
 @RequestMapping( "api/books")
+@CrossOrigin(origins = "*")
 public class BookController {
     @Autowired
     private BookService bookService;
@@ -29,12 +33,24 @@ public class BookController {
     @PutMapping(path = "/{bookId}")
     public Book updateBook(@PathVariable Long bookId,@RequestBody Book book){return bookService.updateBook(bookId,book);}
     @DeleteMapping(path = "/{bookId}")
-    public String deleteBook(@PathVariable Long bookId){
+    public ResponseEntity<Map<String, Boolean>> deleteBook(@PathVariable Long bookId){
         return bookService.deleteBook(bookId);
     }
     @DeleteMapping
-    public String deleteAllBooks(){
+    public ResponseEntity<Map<String, Boolean>> deleteAllBooks(){
         return bookService.deleteAllBooks();
+    }
+//    @DeleteMapping(path = "/{bookId}")
+//    public String deleteBook(@PathVariable Long bookId){
+//        return bookService.deleteBook(bookId);
+//    }
+//    @DeleteMapping
+//    public String deleteAllBooks(){
+//        return bookService.deleteAllBooks();
+//    }
+    @GetMapping(path = "/shop/{bookId}")
+    public BookShop getShop(@PathVariable Long bookId){
+        return bookService.getShopId(bookId);
     }
     @PutMapping(path = "/{bookId}/author/{authorID}")
     public Book assignAuthor(@PathVariable Long bookId,@PathVariable Long authorID){return bookService.assignAuthor(bookId,authorID);}

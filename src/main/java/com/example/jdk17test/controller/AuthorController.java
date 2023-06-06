@@ -3,10 +3,14 @@ package com.example.jdk17test.controller;
 import com.example.jdk17test.entity.Author;
 import com.example.jdk17test.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 @RestController
+@CrossOrigin(origins = "*")
 public class AuthorController {
     @Autowired
     private AuthorService authorService;
@@ -30,8 +34,12 @@ public class AuthorController {
     public Author updateAuthor(@RequestBody Author author,@PathVariable Long authorId){
         return authorService.updateAuthor(author,authorId);
     }
+//    @DeleteMapping("author/delete/{authorId}")
+//    public String deleteAuthor(@PathVariable Long authorId){
+//        return authorService.deleteAuthor(authorId);
+//    }
     @DeleteMapping("author/delete/{authorId}")
-    public String deleteAuthor(@PathVariable Long authorId){
+    public ResponseEntity<Map<String, Boolean>> deleteAuthor(@PathVariable Long authorId){
         return authorService.deleteAuthor(authorId);
     }
     @GetMapping(path = "/author/book/{bookId}")

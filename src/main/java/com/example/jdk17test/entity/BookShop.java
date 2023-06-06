@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -22,5 +23,5 @@ public class BookShop {
     private String contactNo;
     @JsonIgnore
     @OneToMany(mappedBy = "bookShop")
-    List<Book>books;
+    Set<Book> books;
 }

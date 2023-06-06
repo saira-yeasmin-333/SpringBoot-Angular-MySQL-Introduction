@@ -4,9 +4,13 @@ import com.example.jdk17test.entity.Author;
 import com.example.jdk17test.entity.Book;
 import com.example.jdk17test.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class AuthorService {
     @Autowired
@@ -23,9 +27,15 @@ public class AuthorService {
     public Author getAuthorById(Long authorId){
         return authorRepository.findById(authorId).get();
     }
-    public String deleteAuthor(Long authorId){
+//    public String deleteAuthor(Long authorId){
+//        authorRepository.deleteById(authorId);
+//        return "Author with id "+authorId+" removed\n";
+//    }
+    public ResponseEntity<Map<String, Boolean>> deleteAuthor(Long authorId){
         authorRepository.deleteById(authorId);
-        return "Author with id "+authorId+" removed\n";
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return ResponseEntity.ok(response);
     }
     public Author updateAuthor(Author author, Long authorId){
         Author prev=authorRepository.findById(authorId).orElse(null);
@@ -34,7 +44,7 @@ public class AuthorService {
         return authorRepository.save(prev);
     }
 
-    public List<Book>getBooks(Long authorId){
+    public Set<Book>getBooks(Long authorId){
         Author author=authorRepository.findById(authorId).get();
         return author.getBooks();
     }

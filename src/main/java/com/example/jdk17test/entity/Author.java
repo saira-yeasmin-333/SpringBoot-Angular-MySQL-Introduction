@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -18,5 +19,5 @@ public class Author {
     private String authorName;
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.REMOVE,mappedBy = "authors")
-    private List<Book>books;
+    private Set<Book> books;
 }

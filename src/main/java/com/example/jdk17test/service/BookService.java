@@ -2,13 +2,18 @@ package com.example.jdk17test.service;
 
 import com.example.jdk17test.entity.Author;
 import com.example.jdk17test.entity.Book;
+import com.example.jdk17test.entity.BookShop;
 import com.example.jdk17test.repository.AuthorRepository;
 import com.example.jdk17test.repository.BookRepository;
 import com.example.jdk17test.repository.BookShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class BookService {
@@ -33,14 +38,26 @@ public class BookService {
     public List<Book> getBookByTitle(String title){
         return bookRepository.findByTitle(title);
     }
-    public String deleteBook(Long bookId){
+    public ResponseEntity<Map<String, Boolean>> deleteBook(Long bookId){
         bookRepository.deleteById(bookId);
-        return "Book with id "+bookId+" removed\n";
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return ResponseEntity.ok(response);
     }
-    public String deleteAllBooks(){
+    public ResponseEntity<Map<String, Boolean>> deleteAllBooks(){
         bookRepository.deleteAll();
-        return "All books removed\n";
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return ResponseEntity.ok(response);
     }
+//    public String deleteBook(Long bookId){
+//        bookRepository.deleteById(bookId);
+//        return "Book with id "+bookId+" removed\n";
+//    }
+//    public String deleteAllBooks(){
+//        bookRepository.deleteAll();
+//        return "All books removed\n";
+//    }
     public Book updateBook(Long bookId, Book book){
         Book prev=bookRepository.findById(bookId).orElse(null);
         prev.setGenre(book.getGenre());
@@ -54,8 +71,8 @@ public class BookService {
     public Book assignAuthor(Long bookId, Long authorID) {
         Book book=bookRepository.findById(bookId).get();
         Author author=authorRepository.findById(authorID).get();
-        List<Author>authors=book.getAuthors();
-        List<Book>books=author.getBooks();
+        Set<Author> authors=book.getAuthors();
+        Set<Book>books=author.getBooks();
         books.add(book);
         author.setBooks(books);
         authors.add(author);
@@ -66,4 +83,7 @@ public class BookService {
         return bookRepository.getBooksByAuthorId(authorId);
     }
     public List<Book> getBooksByBookShopId(Long shopId) {return bookRepository.getBooksByShopId(shopId);}
+    public BookShop getShopId(Long bookId){
+        return bookRepository.getShopByBookId(bookId);
+    }
 }

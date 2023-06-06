@@ -5,8 +5,12 @@ import com.example.jdk17test.entity.BookShop;
 import com.example.jdk17test.repository.BookRepository;
 import com.example.jdk17test.repository.BookShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BookShopService {
@@ -27,9 +31,15 @@ public class BookShopService {
         return bookShopRepository.findById(shopID).get();
     }
    public List<BookShop> getShopByName(String shopName){return bookShopRepository.findBookShopByShopName(shopName);}
-    public String deleteBookShop(Long shopId){
+//    public String deleteBookShop(Long shopId){
+//        bookShopRepository.deleteById(shopId);
+//        return "BookShop with id "+shopId+" removed\n";
+//    }
+    public ResponseEntity<Map<String, Boolean>> deleteBookShop(Long shopId){
         bookShopRepository.deleteById(shopId);
-        return "BookShop with id "+shopId+" removed\n";
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return ResponseEntity.ok(response);
     }
     public BookShop updateBookShop(Long shopId, BookShop bookShop){
         BookShop prev=bookShopRepository.findById(shopId).orElse(null);
@@ -41,15 +51,22 @@ public class BookShopService {
         prev.setYearOfPublish(bookShop.getYearOfPublish());
         return bookShopRepository.save(prev);
     }
-    public String deleteAllBookShops() {
+//    public String deleteAllBookShops() {
+//        bookShopRepository.deleteAll();
+//        return "All bookShops removed\n";
+//    }
+    public ResponseEntity<Map<String, Boolean>> deleteAllBookShops(){
         bookShopRepository.deleteAll();
-        return "All bookShops removed\n";
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return ResponseEntity.ok(response);
     }
     public BookShop assignShop(Long bookId, Long shopId) {
     Book book=bookRepository.findById(bookId).get();
     BookShop bookShop =bookShopRepository.findById(shopId).get();
     bookShop.getBooks().add(book);
     book.setBookShop(bookShop);
+    System.out.println("succcessfully called");
     return bookShopRepository.save(bookShop);
     }
 }

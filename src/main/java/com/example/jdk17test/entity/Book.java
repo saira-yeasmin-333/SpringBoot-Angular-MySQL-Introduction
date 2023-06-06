@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -24,5 +25,5 @@ public class Book  {
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "book_authors",joinColumns = @JoinColumn(name = "book_id"),inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private List<Author>authors;
+    private Set<Author> authors;
 }
