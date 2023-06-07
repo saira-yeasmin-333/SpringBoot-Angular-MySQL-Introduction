@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BookShopService {
@@ -21,16 +23,16 @@ public class BookShopService {
     public BookShop saveShop(BookShop bookShop){
         return bookShopRepository.save(bookShop);
     }
-    public List<BookShop> saveBookShops(List<BookShop> bookShops){
-        return bookShopRepository.saveAll(bookShops);
+    public Set<BookShop> saveBookShops(Set<BookShop> bookShops){
+        return bookShopRepository.saveAll(bookShops.stream().collect(Collectors.toList())).stream().collect(Collectors.toSet());
     }
-    public List<BookShop>  getBookShops(){
-        return bookShopRepository.findAll();
+    public Set<BookShop>  getBookShops(){
+        return bookShopRepository.findAll().stream().collect(Collectors.toSet());
     }
     public BookShop getBookShopById(Long shopID){
         return bookShopRepository.findById(shopID).get();
     }
-   public List<BookShop> getShopByName(String shopName){return bookShopRepository.findBookShopByShopName(shopName);}
+   public Set<BookShop> getShopByName(String shopName){return bookShopRepository.findBookShopByShopName(shopName);}
 //    public String deleteBookShop(Long shopId){
 //        bookShopRepository.deleteById(shopId);
 //        return "BookShop with id "+shopId+" removed\n";
@@ -64,7 +66,7 @@ public class BookShopService {
     public BookShop assignShop(Long bookId, Long shopId) {
     Book book=bookRepository.findById(bookId).get();
     BookShop bookShop =bookShopRepository.findById(shopId).get();
-    bookShop.getBooks().add(book);
+    //bookShop.getBooks().add(book);
     book.setBookShop(bookShop);
     System.out.println("succcessfully called");
     return bookShopRepository.save(bookShop);

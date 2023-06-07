@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -26,16 +24,16 @@ public class BookService {
     public Book saveBook(Book book){
         return bookRepository.save(book);
     }
-    public List<Book>  saveBooks(List<Book> books){
-        return bookRepository.saveAll(books);
+    public Set<Book>  saveBooks(Set<Book> books){
+        return bookRepository.saveAll(books.stream().collect(Collectors.toList())).stream().collect(Collectors.toSet());
     }
-    public List<Book>  getBooks(){
-        return bookRepository.findAll();
+    public Set<Book>  getBooks(){
+        return bookRepository.findAll().stream().collect(Collectors.toSet());
     }
     public Book getBookById(Long bookId){
         return bookRepository.findById(bookId).get();
     }
-    public List<Book> getBookByTitle(String title){
+    public Set<Book> getBookByTitle(String title){
         return bookRepository.findByTitle(title);
     }
     public ResponseEntity<Map<String, Boolean>> deleteBook(Long bookId){
@@ -71,18 +69,16 @@ public class BookService {
     public Book assignAuthor(Long bookId, Long authorID) {
         Book book=bookRepository.findById(bookId).get();
         Author author=authorRepository.findById(authorID).get();
+
         Set<Author> authors=book.getAuthors();
-        Set<Book>books=author.getBooks();
-        books.add(book);
-        author.setBooks(books);
         authors.add(author);
         book.setAuthors(authors);
         return bookRepository.save(book);
     }
-    public List<Book>getBooksByAuthorId(Long authorId){
+    public Set<Book>getBooksByAuthorId(Long authorId){
         return bookRepository.getBooksByAuthorId(authorId);
     }
-    public List<Book> getBooksByBookShopId(Long shopId) {return bookRepository.getBooksByShopId(shopId);}
+    public Set<Book> getBooksByBookShopId(Long shopId) {return bookRepository.getBooksByShopId(shopId);}
     public BookShop getShopId(Long bookId){
         return bookRepository.getShopByBookId(bookId);
     }

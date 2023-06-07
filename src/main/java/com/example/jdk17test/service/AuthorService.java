@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
@@ -18,11 +20,11 @@ public class AuthorService {
     public Author saveAuthor(Author author){
         return authorRepository.save(author);
     }
-    public List<Author> saveAuthors(List<Author> authors){
-        return authorRepository.saveAll(authors);
+    public Set<Author> saveAuthors(Set<Author> authors){
+        return authorRepository.saveAll(authors).stream().collect(Collectors.toSet());
     }
-    public List<Author>  getAllAuthors(){
-        return authorRepository.findAll();
+    public Set<Author>  getAllAuthors(){
+        return authorRepository.findAll().stream().collect(Collectors.toSet());
     }
     public Author getAuthorById(Long authorId){
         return authorRepository.findById(authorId).get();
@@ -44,12 +46,12 @@ public class AuthorService {
         return authorRepository.save(prev);
     }
 
-    public Set<Book>getBooks(Long authorId){
+    public Set<Book> getBooks(Long authorId){
         Author author=authorRepository.findById(authorId).get();
         return author.getBooks();
     }
 
-    public List<Author>getAuthorsByBookId(Long bookId){
+    public Set<Author>getAuthorsByBookId(Long bookId){
         return authorRepository.getAuthorsByBookId(bookId);
     }
 }

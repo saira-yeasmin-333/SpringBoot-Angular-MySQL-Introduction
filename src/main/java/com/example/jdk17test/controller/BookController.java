@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 @RestController
@@ -19,7 +20,7 @@ public class BookController {
     @PostMapping
     public Book addBook(@RequestBody Book book){return bookService.saveBook(book);}
     @GetMapping
-    public List<Book> findAllBooks(){
+    public Set<Book> findAllBooks(){
         return bookService.getBooks();
     }
     @GetMapping(path = "/id/{bookId}")
@@ -27,7 +28,7 @@ public class BookController {
         return bookService.getBookById(bookId);
     }
     @GetMapping(path = "/title/{title}")
-    public List<Book> findBookByTitle(@PathVariable String title){
+    public Set<Book> findBookByTitle(@PathVariable String title){
         return bookService.getBookByTitle(title);
     }
     @PutMapping(path = "/{bookId}")
@@ -55,7 +56,7 @@ public class BookController {
     @PutMapping(path = "/{bookId}/author/{authorID}")
     public Book assignAuthor(@PathVariable Long bookId,@PathVariable Long authorID){return bookService.assignAuthor(bookId,authorID);}
     @GetMapping(path = "/author/{authorId}")
-    public List<Book> findBooksByAuthorId(@PathVariable Long authorId) {return bookService.getBooksByAuthorId(authorId);}
+    public Set<Book> findBooksByAuthorId(@PathVariable Long authorId) {return bookService.getBooksByAuthorId(authorId);}
     @GetMapping(path = "/bookshop/{shopId}")
-    public List<Book> findBooksByBookShopId(@PathVariable Long shopId) {return bookService.getBooksByBookShopId(shopId);}
+    public Set<Book> findBooksByBookShopId(@PathVariable Long shopId) {return bookService.getBooksByBookShopId(shopId);}
 }

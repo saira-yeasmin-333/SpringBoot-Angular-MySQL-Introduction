@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -19,11 +20,11 @@ public class AuthorController {
         return authorService.saveAuthor(author);
     }
     @PostMapping("/author/addAll")
-    public List<Author> addAuthors(@RequestBody List<Author> authors){
+    public Set<Author> addAuthors(@RequestBody Set<Author> authors){
         return authorService.saveAuthors(authors);
     }
     @GetMapping("/author/getAll")
-    public List<Author> findAllAuthors(){
+    public Set<Author> findAllAuthors(){
         return authorService.getAllAuthors();
     }
     @GetMapping("/author/getById/{authorId}")
@@ -43,7 +44,7 @@ public class AuthorController {
         return authorService.deleteAuthor(authorId);
     }
     @GetMapping(path = "/author/book/{bookId}")
-    public List<Author> findAuthorsByBookTd(@PathVariable Long bookId) {
+    public Set<Author> findAuthorsByBookTd(@PathVariable Long bookId) {
         return authorService.getAuthorsByBookId(bookId);
     }
 }

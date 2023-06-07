@@ -3,6 +3,8 @@ package com.example.jdk17test.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -25,5 +27,5 @@ public class Book  {
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "book_authors",joinColumns = @JoinColumn(name = "book_id"),inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors;
+    private Set<Author> authors=new HashSet<>();
 }

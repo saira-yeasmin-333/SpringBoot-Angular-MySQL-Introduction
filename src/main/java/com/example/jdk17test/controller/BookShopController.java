@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping( "/api/bookshops")
@@ -21,7 +22,7 @@ public class BookShopController {
         return bookShopService.saveShop(bookShop);
     }
     @GetMapping
-    public List<BookShop> findAllBookShops(){
+    public Set<BookShop> findAllBookShops(){
         return bookShopService.getBookShops();
     }
     @GetMapping(path = "/id/{shopId}")
@@ -29,7 +30,7 @@ public class BookShopController {
         return bookShopService.getBookShopById(shopId);
     }
     @GetMapping(path = "/name/{name}")
-    public List<BookShop> findBookShopByName(@PathVariable String name){
+    public Set<BookShop> findBookShopByName(@PathVariable String name){
         return bookShopService.getShopByName(name);
     }
     @PutMapping(path = "/{shopId}")
