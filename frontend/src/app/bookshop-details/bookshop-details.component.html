@@ -1,0 +1,45 @@
+<h3 style="color: blueviolet;">Welcome to Bookshop Details</h3>
+<div>
+    <div>
+        <label> <b> Bookshop Id: </b></label> {{bookshop.shopId}}
+    </div>
+    <div>
+        <label> <b> Shop Name: </b></label> {{bookshop.shopName}}
+    </div>
+    <div>
+        <label> <b> Location: </b></label> {{bookshop.location}}
+    </div>
+    <div>
+        <label> <b> Email: </b></label> {{bookshop.email}}
+    </div>
+    <div>
+        <label> <b> Contact No: </b></label> {{bookshop.contactNo}}
+    </div>
+
+    <div >
+        <h4 style="color: blueviolet;">Books:</h4>
+        <table class="table tablestriped">
+            <thead>
+              <tr>
+                <th>Book Id</th>
+                <th>Publish Of Year</th>
+                <th>Genre</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Publisher</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let b of books" >
+                <td> {{ b.bookId }} </td>
+                <td> {{ b.yearOfPublish }} </td>
+                <td> {{ b.genre }} </td>
+                <td> {{ b.title  }}  </td>
+                <td> {{ b.price }}</td>
+                <td> {{ b.publisher }}</td>
+              </tr>
+            </tbody>
+          </table>
+          
+    </div>
+</div>
