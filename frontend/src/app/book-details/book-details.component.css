@@ -1,0 +1,14 @@
+.author-container{
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.author-card{
+    border: solid 1px #00000000;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #0090ff;
+    color: white;
+    width: 50%;
+}

@@ -1,0 +1,35 @@
+<div class="container">
+  <h2  style="float: left;color: blueviolet;margin-left: -13px;">{{title}}</h2>
+  <div style="vertical-align: top;float: right;text-align: center;width: 50px;">
+    <fa-icon [icon]="faPlus" (click)="addShop()" style="color: blueviolet;margin-right: 12px;"></fa-icon>
+    <h5 style="text-align: center;color: blueviolet;margin-left: -2px;">ADD</h5>
+  </div>
+</div>
+<table class="table tablestriped">
+  <thead>
+    <tr>
+      <th>Bookshop Id</th>
+      <th>Shop Name</th>
+      <th>Location</th>
+      <th>Email</th>
+      <th>Contact No</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let b of bookshops" >
+      <td> {{ b.shopId }} </td>
+      <td> {{ b.shopName }} </td>
+      <td> {{ b.location }} </td>
+      <td> {{ b.email }}</td>
+      <td> {{b.contactNo}}</td>
+      <td>
+        <fa-icon [icon]="faTrash" (click)="deleteBookshop(b.shopId)" style="color: #be0d0d;margin-right: 12px;"></fa-icon>
+        <fa-icon [icon]="faPenSquare" (click)="updateBookshop(b.shopId)" style="color: #4846be;margin-right: 12px;"></fa-icon>
+        <!-- <button (click) = "updateBookshop(b.shopId)" class = "btn btn-info"> Update</button> -->
+        <!-- <button (click) = "deleteBookshop(b.shopId)" class = "btn btn-danger" style="margin-left: 10px"> Delete</button> -->
+        <button (click) = "bookshopDetails(b.shopId)" class = "btn btn-info" style="margin-left: 10px"> View</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

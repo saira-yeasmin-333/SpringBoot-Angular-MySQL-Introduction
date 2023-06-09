@@ -1,0 +1,54 @@
+<h3 style="color: blueviolet;">Welcome to Book Details</h3>
+<div *ngIf="book!==null">
+    <div>
+        <label> <b> Book Id: </b></label> {{book.bookId}}
+    </div>
+    <div>
+        <label> <b> Title: </b></label> {{book.title}}
+    </div>
+    <div>
+        <label> <b> Genre: </b></label> {{book.genre}}
+    </div>
+    <div>
+        <label> <b> Publisher: </b></label> {{book.publisher}}
+    </div>
+    <div>
+        <label> <b> Year of Publish: </b></label> {{book.yearOfPublish}}
+    </div>
+    <div>
+        <label> <b> Price: </b></label> {{book.price}}
+    </div>
+    <div style="margin-bottom: 20px;" *ngif="bookshop!==null">
+        <label> <b><u> BookShop </u></b></label><br/> 
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>Name: </b>{{bookshop.shopName}}<br/> 
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>Location: </b>{{bookshop.location}}<br/> 
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>Contact No: </b>{{bookshop.contactNo}}<br/> 
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>Email: </b>{{bookshop.email}}
+    </div>
+    <label class="col-sm-2" style="color: blueviolet;font-size: large;margin-bottom: 10px;">
+        Assign Author
+    </label>
+    <form (ngSubmit)="onSubmit()">
+        <div class="col-sm-10">
+            <select name="Shop" (change)="changeAuthor($event)" class="form-control">
+                <option>
+                    --Select--
+                </option>
+                <option *ngFor="let c of authors">{{c.authorId}}.{{(c.authorName)}}</option>
+            </select>
+        </div>
+        <button class = "btn btn-success" type ="submit" style="margin-top: 20px;margin-right: 20px;">Submit</button>
+        <button class = "btn btn-info" (click) ="showAuthors()" type ="button" style="margin-top: 20px;" >Show Authors</button>
+    </form>
+
+    <div *ngIf="assignedAuthors===null||assignedAuthors.length===0">
+        <h6 style="color: darkred;margin-top: 15px;">This book has no authors</h6>
+    </div>
+
+    <div class="author-container" *ngIf="assignedAuthors!==null&&assignedAuthors.length!==0" style="margin-top: 15px;">
+        <div class="author-card" *ngFor="let author of assignedAuthors">
+            <b>Author Name: </b>{{author.authorName}}
+        </div>
+    </div>
+    
+</div>

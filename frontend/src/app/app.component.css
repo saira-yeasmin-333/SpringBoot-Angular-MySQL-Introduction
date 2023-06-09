@@ -1,0 +1,17 @@
+.my-footer{
+    position: fixed;
+    bottom: 0;
+}
+
+.my-nav{
+    position:fixed;
+    width: 100vw;
+    top: 0px;
+}
+
+.main-container{
+    background-color: #32CD3222;
+    height: calc(100vh - 96px);
+    overflow-y: scroll;
+    transform: translateY(56px);
+}
